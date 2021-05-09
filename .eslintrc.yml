@@ -1,0 +1,17 @@
+env:
+  es2017: true
+  browser: true
+  commonjs: true
+  jest: true
+
+extends: ['htmlacademy/es6']
+
+parserOptions:
+  ecmaFeatures:
+    jsx: true
+  ecmaVersion: 2018
+  sourceType: module
+
+settings:
+  react:
+    version: '16'
