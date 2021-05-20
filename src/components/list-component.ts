@@ -111,23 +111,23 @@ export default class ListComponent extends AbstractComponent {
     }
   }
 
-  private dragoverHandler(container: HTMLDivElement, evt: any): void {
+  private dragoverHandler(container: HTMLDivElement, evt: MouseEvent): void {
     evt.preventDefault();
 
-    const elementUnder: HTMLDivElement = evt.target;
+    const elementUnder: EventTarget = evt.target;
     const draggedElement: HTMLDivElement = this.taskService.getDraggedElement();
 
     if (elementUnder === draggedElement) {
       return;
     }
 
-    if (elementUnder.classList.contains(`task`)) {
+    if ((<HTMLDivElement>elementUnder).classList.contains(`task`)) {
       renderElement(container, draggedElement, InsertPosition.BEFOREBEGIN,
-        elementUnder === draggedElement.nextElementSibling
-          ? elementUnder.nextElementSibling
-          : elementUnder);
+        (<HTMLDivElement>elementUnder) === draggedElement.nextElementSibling
+          ? (<HTMLDivElement>elementUnder).nextElementSibling
+          : (<HTMLDivElement>elementUnder));
 
-      draggedElement.dataset.status = ListComponent.extractStatus(elementUnder);
+      draggedElement.dataset.status = ListComponent.extractStatus((<HTMLDivElement>elementUnder));
 
       this.taskService.elementDragover();
     }
